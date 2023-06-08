@@ -48,7 +48,7 @@ const ManageBooking = () => {
           <div className="option">
             <img src="path/to/activity-image.png" alt="Activity" />
             <h3>View Booking</h3>
-            <Link to="/viewBooking">
+            <Link to="/viewBookings">
               <button>View Booking </button>
             </Link>
           </div>

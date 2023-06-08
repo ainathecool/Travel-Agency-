@@ -28,7 +28,7 @@ const createBooking = async (req, res) => {
   const getAllBookings = async (req, res) => {
     try {
       const bookings = await Booking.find().populate('user').populate('bookingId');
-      return res.status(200).json({ bookings });
+      return res.status(200).json({ bookings: bookings});
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Internal server error' });

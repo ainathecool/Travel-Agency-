@@ -27,7 +27,7 @@ const ManageLocation = () => {
           <div className="option">
             <img src="path/to/user-image.png" alt="User" />
             <h3>API Locations</h3>
-            <Link to="/locationsthroughAPI">
+            <Link to="/getAPILocations">
               <button>API Locations</button>
             </Link>
           </div>

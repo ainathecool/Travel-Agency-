@@ -22,7 +22,7 @@ userRouter.get("/USER", verifyUserLoggedIn, (req,res, next)=>{
 })
 
 //update profile
-userRouter.post("/updateProfile",  upload.array("file"), updateProfile,  (req,res, next)=>{
+userRouter.post("/updateProfile", upload.array("file"), updateProfile,  (req,res, next)=>{
     res.status(201).send({"Message":"Update Profile"})
 })
 
@@ -193,7 +193,7 @@ userRouter.post('/CreateBooking', verifyUserLoggedIn, createBooking, (req,res,ne
 })
 
 //view all bookings
-userRouter.get('/viewAllBookings', verifyUserLoggedIn, getAllBookings, (req,res,next)=>{
+userRouter.get('/viewAllBookings', getAllBookings, (req,res,next)=>{
     res.status(201).send({"Message":"View All Bookings"})
 })
 
@@ -232,7 +232,7 @@ userRouter.post('/CreatePlan', verifyUserLoggedIn, createPlan, (req,res,next)=>{
 })
 
 //view all plans
-userRouter.get('/viewAllPlans', verifyUserLoggedIn, getAllPlans, (req,res,next)=>{
+userRouter.get('/viewAllPlans', getAllPlans, (req,res,next)=>{
     res.status(201).send({"Message":"View All Plans"})
 })
 
@@ -267,7 +267,7 @@ userRouter.post('/CreateReview', verifyUserLoggedIn, createReview, (req,res,next
 })
 
 //view all reviews
-userRouter.get('/viewAllReviews', verifyUserLoggedIn, getAllReviews, (req,res,next)=>{
+userRouter.get('/viewAllReviews', getAllReviews, (req,res,next)=>{
     res.status(201).send({"Message":"View All Reviews"})
 })
 

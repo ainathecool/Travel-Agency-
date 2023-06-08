@@ -49,7 +49,7 @@ const createReview = async (req, res) => {
 const getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.find().populate('user').populate('reviewId');
-    return res.status(200).json({ reviews });
+    return res.status(200).json({ reviews: reviews });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });

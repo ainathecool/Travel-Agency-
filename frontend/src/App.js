@@ -10,6 +10,9 @@ import SearchLocations from './pages/Location/SearchLocation';
 import ManageLocations from './pages/Location/ManageLocation';
 import UserLocation from './pages/Location/UserLocation';
 import ViewLocations from './pages/Location/viewLocations';
+import GetAPILocations from './pages/Location/locationsAPI';
+import UpdateLocations from './pages/Location/UpdateLocations';
+import DeleteLocations from './pages/Location/DeleteLocations';
 
 import SearchTransport from './pages/Transportation/SearchTransportation';
 import ManageTransportation from './pages/Transportation/ManageTransportation';
@@ -28,15 +31,18 @@ import ViewActivities from './pages/Activities/ViewActivities';
 import SearchBooking from './pages/Booking/searchBookings';
 import ManageBooking from './pages/Booking/ManageBookings';
 import UserBooking from './pages/Booking/UserBookings';
+import ViewBookings from './pages/Booking/viewBookings';
 
 import SearchPlan from './pages/Plans/searchPlans';
 import ManagePlans from './pages/Plans/ManagePlans';
 import UserPlans from './pages/Plans/UserPlans';
+import ViewAllPlans from './pages/Plans/viewPlans';
 
 
 import SearchReviews from './pages/Reviews/SearchReviews';
 import ManageReview from './pages/Reviews/ManageReviews';
 import UserReviews from './pages/Reviews/UserReviews';
+import ViewReviews from './pages/Reviews/getAllReviews';
 
 import React from 'react'
 
@@ -56,6 +62,9 @@ function App() {
         <Route path="/manageLocations" element={<ManageLocations/>}/>
         <Route path="/Locations" element={<UserLocation/>}/>
         <Route path="/viewLocations" element={<ViewLocations/>}/>
+        <Route path="/getAPILocations" element={<GetAPILocations/>}/>
+        <Route path="/updateLocations" element={<UpdateLocations/>}/>
+        <Route path="/deleteLocations" element={<DeleteLocations/>}/>
 
         <Route path="/searchTransport" element={<SearchTransport/>}/>
         <Route path="/manageTransport" element={<ManageTransportation/>}/>
@@ -74,14 +83,18 @@ function App() {
         <Route path="/searchBooking" element={<SearchBooking/>}/>
         <Route path="/manageBookings" element={<ManageBooking/>}/>
         <Route path="/Bookings" element={<UserBooking/>}/>
+        <Route path="/viewBookings" element={<ViewBookings/>}/>
 
         <Route path="/searchPlans" element={<SearchPlan/>}/>
         <Route path="/managePlans" element={<ManagePlans/>}/>
         <Route path="/Plans" element={<UserPlans/>}/>
+        <Route path="/viewPlans" element={<ViewAllPlans/>}/>
+      
 
         <Route path="/searchReviews" element={<SearchReviews/>}/>
         <Route path="/manageReviews" element={<ManageReview/>}/>
         <Route path="/Reviews" element={<UserReviews/>}/>
+        <Route path="/viewReviews" element={<ViewReviews/>}/>
 
 
 

@@ -23,6 +23,7 @@ const populateLocations = async () => {
     await Location.create(locations);
 
     console.log('Locations populated successfully');
+    res.status(200).json({ message: 'Locations populated successfully' });
   } catch (error) {
     console.error('Error populating locations:', error);
   }
@@ -91,7 +92,7 @@ const updateLocationByName = async (req, res) => {
     const { name, newDescription, newImageUrl } = req.body;
 
     // Find the location by name
-    let location = await Location.findOne({ name });
+    let location = await Location.findOne({ name: { $regex: name, $options: 'i' }  });
 
     if (!location) {
       return res.status(404).json({ message: 'Location not found' });
@@ -125,7 +126,7 @@ const deleteLocationByName = async (req, res) => {
     const { name } = req.body;
 
     // Delete the location by name
-    const result = await Location.deleteOne({ name });
+    const result = await Location.deleteOne({ name: { $regex: name, $options: 'i' } });
 
     if (result.deletedCount === 0) {
       return res.status(404).json({ message: 'Location not found' });

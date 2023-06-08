@@ -48,7 +48,7 @@ const ManagePlans = () => {
           <div className="option">
             <img src="path/to/activity-image.png" alt="Activity" />
             <h3>View Plan</h3>
-            <Link to="/viewPlan">
+            <Link to="/viewPlans">
               <button>View Plan </button>
             </Link>
           </div>
