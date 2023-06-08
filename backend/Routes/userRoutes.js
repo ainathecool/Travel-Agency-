@@ -188,7 +188,7 @@ userRouter.delete('/deleteActivity', deleteActivityByName, (req,res,next)=>{
 
 //booking controller
 //create booking
-userRouter.post('/CreateBooking', verifyUserLoggedIn, createBooking, (req,res,next)=>{
+userRouter.post('/CreateBooking', createBooking, (req,res,next)=>{
     res.status(201).send({"Message":"Create Booking"})
 })
 
@@ -208,17 +208,17 @@ userRouter.get('/viewBookingByStatus', getBookingByStatus, (req,res,next)=>{
 })
 
 //update booking by type
-userRouter.put('/updateBookingByType', verifyUserLoggedIn, updateBookingByType, (req,res,next)=>{
+userRouter.put('/updateBookingByType', updateBookingByType, (req,res,next)=>{
     res.status(201).send({"Message":"Update booking by type"})
 })
 
 //delete booking by type
-userRouter.delete('/deleteBookingByType', verifyUserLoggedIn, deleteBookingByType, (req,res,next)=>{
+userRouter.delete('/deleteBookingByType', deleteBookingByType, (req,res,next)=>{
     res.status(201).send({"Message":"Delete booking by type"})
 })
 
 //confirm bookimg through payement
-userRouter.put('/confirmBooking', verifyUserLoggedIn, confirmBooking, (req,res,next)=>{
+userRouter.put('/confirmBooking', confirmBooking, (req,res,next)=>{
     res.status(201).send({"Message":"Confirm Booking"})
 })
 

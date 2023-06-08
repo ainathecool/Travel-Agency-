@@ -16,7 +16,7 @@ const createBooking = async (req, res) => {
 
     await booking.save();
 
-    return res.status(201).json({ booking });
+    return res.status(201).json({ message: "booking created" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });
@@ -97,7 +97,7 @@ const updateBookingByType = async (req, res) => {
         return res.status(404).json({ message: 'booking not found' });
       }
   
-      res.status(200).json({ booking: updatedBooking });
+      res.status(200).json({ message: "booking updated" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
@@ -112,7 +112,7 @@ const updateBookingByType = async (req, res) => {
           const { bookingType } = req.body;
       
           // Delete the location by name
-          const result = await Booking.deleteOne({ bookingType });
+          const result = await Booking.deleteOne({ bookingType: { $regex: bookingType, $options: 'i' }   });
       
           if (result.deletedCount === 0) {
             return res.status(404).json({ message: 'booking not found' });

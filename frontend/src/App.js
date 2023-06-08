@@ -35,6 +35,9 @@ import SearchBooking from './pages/Booking/searchBookings';
 import ManageBooking from './pages/Booking/ManageBookings';
 import UserBooking from './pages/Booking/UserBookings';
 import ViewBookings from './pages/Booking/viewBookings';
+import CreateBookings from './pages/Booking/CreateBooking';
+import UpdateBookings from './pages/Booking/UpdateBooking';
+import DeleteBookings from './pages/Booking/DeleteBooking';
 
 import SearchPlan from './pages/Plans/searchPlans';
 import ManagePlans from './pages/Plans/ManagePlans';
@@ -90,6 +93,9 @@ function App() {
         <Route path="/manageBookings" element={<ManageBooking/>}/>
         <Route path="/Bookings" element={<UserBooking/>}/>
         <Route path="/viewBookings" element={<ViewBookings/>}/>
+        <Route path="/addBooking" element={<CreateBookings/>}/>
+        <Route path="/updateBooking" element={<UpdateBookings/>}/>
+        <Route path="/deleteBooking" element={<DeleteBookings/>}/>
 
         <Route path="/searchPlans" element={<SearchPlan/>}/>
         <Route path="/managePlans" element={<ManagePlans/>}/>
