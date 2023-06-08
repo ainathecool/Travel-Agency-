@@ -2,7 +2,14 @@ const express = require("express");
 const uRoutes = require("./Routes/userRoutes");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const cors = require('cors');
 
+const app = express()
+app.use(express.json())
+
+// Enable CORS for all routes
+app.use(cors());
+app.use("/user", uRoutes);
 
 
 
@@ -11,10 +18,6 @@ mongoose.connect(process.env.MONGO_URL).then(() =>{
 }).catch(err=>{
     console.log(err)
 })
-const app = express()
-app.use(express.json())
-
-app.use("/user", uRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`App listening on port ${process.env.PORT}`);

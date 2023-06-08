@@ -16,12 +16,15 @@ const userSchema = new Schema({
     required: true
   },
   profilePicture: {
-    type: String,
-    default: 'default.jpg'
+    type: String
   },
   interests: [{
     type: String
-  }]
+  }],
+  role: {
+    type: String
+  }
+
 },
 
 { timestamps: true}

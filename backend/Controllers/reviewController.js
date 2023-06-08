@@ -56,6 +56,23 @@ const getAllReviews = async (req, res) => {
   }
 }
 
+ // Get review by type
+ const getReviewsByType = async (req, res) => {
+  try {
+    const { reviewType } = req.query;
+    const reviews = await Review.find({ reviewType: { $regex: reviewType, $options: 'i' }  }).populate('user').populate('reviewId');
+
+    if (!reviews) {
+      return res.status(404).json({ message: 'reviews not found' });
+    }
+
+    res.status(200).json({ reviews: reviews });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+} //end get by name
+
 
 // Update transportation to add a review
 const updateTransportationWithReview = async (req, res) => {
@@ -166,5 +183,6 @@ const updateAccommodationWithReview = async (req, res) => {
 
 module.exports = {
     createReview,
-    getAllReviews
+    getAllReviews,
+    getReviewsByType
 }

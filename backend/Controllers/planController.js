@@ -46,13 +46,14 @@ const getAllPlans = async (req, res) => {
  const getPlanByStatus = async (req, res) => {
     try {
       const { status } = req.query;
-      const plan = await Plan.find({ status }).populate('user accommodations transportations activities');//.populate('reviews');
+      const plan = await Plan.find({status: { $regex: status, $options: 'i' }}).populate('user accommodations transportations activities');//.populate('reviews');
   
-      if (plan.length === 0) {
-        return res.status(404).json({ message: 'No plan found' });
+      if (!plan) {
+        return res.status(404).json({ message: 'plan not found' });
       }
   
-      res.status(200).json({ plan });
+  
+      res.status(200).json({ plan: plan });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });

@@ -11,6 +11,7 @@ let signup = async (req,res) => {
     let {password, name, email, socialMediaAccessToken, socialMediaProvider } = req.body;
 
     let user = await User.findOne({ email }); //chechking if user already exists
+    let idToken = socialMediaAccessToken;
 
     if (user) { //if user exists already
       return res.status(400).json({ message: 'User already exists' });
@@ -18,8 +19,8 @@ let signup = async (req,res) => {
 
 
     //if user wants to signup from google
-    if (socialMediaAccessToken && socialMediaProvider === "google") { //if both things are provided
-      const { name, email } = await getUserProfileFromSocialMediaAPIGoogle(socialMediaAccessToken, socialMediaProvider);
+    if (idToken && socialMediaProvider === "google") { //if both things are provided
+      const { name, email } = await getUserProfileFromSocialMediaAPIGoogle(idToken);
 
       user = new User({ email, name });
     }
@@ -89,7 +90,8 @@ let login = async (req,res) =>{
                         }else{
                             if(password=founduser.password){
                                 let token = jwt.sign({
-                                    id: founduser._id
+                                    id: founduser._id,
+                                    role: founduser.role,
                                 }, process.env.JWT_SECRET_KEY , {
                                     expiresIn: '24h'
                                 })
@@ -134,7 +136,6 @@ const updateProfile = async (req, res) => {
 
       if(user)
       {
-
                     // Update user profile fields if provided
                 if (name) {
                     user.name = name;
@@ -189,7 +190,7 @@ const updateProfile = async (req, res) => {
       // Find users with a partial string match for the specified interest
       const users = await User.find({ interests: { $regex: interest, $options: 'i' } });
   
-      return res.status(200).json({ users });
+      return res.status(200).json({ users: users });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Internal server error' });
@@ -203,7 +204,7 @@ const updateProfile = async (req, res) => {
       // Search for users with matching name (case-insensitive)
       const users = await User.find({ name: { $regex: name, $options: 'i' } });
   
-      return res.status(200).json({ users });
+      return res.status(200).json({ users: users });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Internal server error' });

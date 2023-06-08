@@ -41,13 +41,13 @@ const createBooking = async (req, res) => {
     const getBookingByBookingType = async (req, res) => {
         try {
           const { bookingType } = req.query;
-          const booking = await Booking.find({ bookingType }).populate('user').populate('bookingId');//.populate('reviews');
+          const booking = await Booking.find({  bookingType: { $regex: bookingType, $options: 'i' }  }).populate('user').populate('bookingId');//.populate('reviews');
       
-          if (booking.length === 0) {
-            return res.status(404).json({ message: 'No booking found' });
+          if (!booking) {
+            return res.status(404).json({ message: 'booking not found' });
           }
       
-          res.status(200).json({ booking });
+          res.status(200).json({ booking: booking });
         } catch (error) {
           console.error(error);
           res.status(500).json({ message: 'Internal server error' });
@@ -60,13 +60,14 @@ const createBooking = async (req, res) => {
     const getBookingByStatus = async (req, res) => {
         try {
           const { status } = req.query;
-          const booking = await Booking.find({ status }).populate('user').populate('bookingId');//.populate('reviews');
+          const booking = await Booking.find({ status: { $regex: status, $options: 'i' }  }).populate('user').populate('bookingId');//.populate('reviews');
       
-          if (booking.length === 0) {
-            return res.status(404).json({ message: 'No booking found' });
+          if (!booking) {
+            return res.status(404).json({ message: 'booking not found' });
           }
       
-          res.status(200).json({ booking });
+      
+          res.status(200).json({ booking: booking });
         } catch (error) {
           console.error(error);
           res.status(500).json({ message: 'Internal server error' });

@@ -32,7 +32,7 @@ const createActivity = async (req, res) => {
 const getAllActivities = async (req, res) => {
     try {
       const activities = await Activity.find().populate('location reviews');
-      return res.status(200).json({ activities });
+      return res.status(200).json({ activities: activities });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Internal server error' });
@@ -45,13 +45,13 @@ const getAllActivities = async (req, res) => {
   const getActivityByName = async (req, res) => {
     try {
       const { name } = req.query;
-      const activities = await Activity.find({ name }).populate('location');//.populate('reviews');
+      const activities = await Activity.find({ name: { $regex: name, $options: 'i' } }).populate('location');//.populate('reviews');
   
-      if (activities.length === 0) {
-        return res.status(404).json({ message: 'No activities found' });
+      if (!activities) {
+        return res.status(404).json({ message: 'activities not found' });
       }
   
-      res.status(200).json({ activities });
+      res.status(200).json({ activities: activities });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });

@@ -1,0 +1,60 @@
+/* navbar.css */
+
+.navbar {
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  .navbar__menu {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-center;
+  }
+  
+  .navbar__item {
+    margin: 0 10px;
+  }
+  
+  .user-navbar__link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .user-navbar__link:hover {
+    color: blue;
+  }
+  
+
+
+
+  /*admin*/
+  /* admin-navbar.css */
+
+.admin-navbar {
+    background-color: #333333;
+    padding: 20px;
+  }
+  
+  .admin-navbar__menu {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-center;
+  }
+  
+  .admin-navbar__item {
+    margin: 0 10px;
+  }
+  
+  .admin-navbar__link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .admin-navbar__link:hover {
+    color: #ff9900;
+  }
+  

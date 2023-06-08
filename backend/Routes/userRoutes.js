@@ -7,7 +7,8 @@ const {createTransportation, getAllTransportations, getTransportationsByName, up
 const {createActivity, getAllActivities, getActivityByName, updateActivityByName, deleteActivityByName} = require("../Controllers/activitiesController");
 const {createBooking, getAllBookings, getBookingByBookingType, getBookingByStatus, updateBookingByType, deleteBookingByType, confirmBooking} = require("../Controllers/bookingController");
 const { createPlan, getAllPlans, getPlanByStatus, updatePlanByStatus, deletePlanByStatus, confirmPlan} = require("../Controllers/planController");
-const {createReview, getAllReviews} = require("../Controllers/reviewController");
+const {createReview, getAllReviews, getReviewsByType} = require("../Controllers/reviewController");
+const {checkAdmin, checkStudent} = require("../Utils/authenticate");
 
 //signup route
 userRouter.post("/signup", signup)
@@ -21,7 +22,7 @@ userRouter.get("/USER", verifyUserLoggedIn, (req,res, next)=>{
 })
 
 //update profile
-userRouter.post("/updateProfile", verifyUserLoggedIn, upload.array("file"), updateProfile,  (req,res, next)=>{
+userRouter.post("/updateProfile",  upload.array("file"), updateProfile,  (req,res, next)=>{
     res.status(201).send({"Message":"Update Profile"})
 })
 
@@ -197,12 +198,12 @@ userRouter.get('/viewAllBookings', verifyUserLoggedIn, getAllBookings, (req,res,
 })
 
 //view booking by booking type
-userRouter.get('/viewBookingByBookingType', verifyUserLoggedIn, getBookingByBookingType, (req,res,next)=>{
+userRouter.get('/viewBookingByBookingType', getBookingByBookingType, (req,res,next)=>{
     res.status(201).send({"Message":"View Booking By Booking Type"})
 })
 
 //view booking by status
-userRouter.get('/viewBookingByStatus', verifyUserLoggedIn, getBookingByStatus, (req,res,next)=>{
+userRouter.get('/viewBookingByStatus', getBookingByStatus, (req,res,next)=>{
     res.status(201).send({"Message":"View Booking By Status"})
 })
 
@@ -236,7 +237,7 @@ userRouter.get('/viewAllPlans', verifyUserLoggedIn, getAllPlans, (req,res,next)=
 })
 
 //get plan by status
-userRouter.get('/viewPlanByStatus', verifyUserLoggedIn, getPlanByStatus, (req,res,next)=>{
+userRouter.get('/viewPlanByStatus', getPlanByStatus, (req,res,next)=>{
     res.status(201).send({"Message":"View Plan By Status"})
 })
 
@@ -270,4 +271,9 @@ userRouter.get('/viewAllReviews', verifyUserLoggedIn, getAllReviews, (req,res,ne
     res.status(201).send({"Message":"View All Reviews"})
 })
 
+
+//get review by tyoe
+userRouter.get('/getReviewByType', getReviewsByType, (req,res,next)=>{
+    res.status(201).send({"Message":"View All Reviews"})
+})
 module.exports = userRouter;

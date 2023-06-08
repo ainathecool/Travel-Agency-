@@ -1,0 +1,16 @@
+//signup from google
+Yes, with the provided frontend component and backend code, you should be able to perform a successful sign-up from Google. Here's how the flow works:
+
+1. When the user clicks on the "Sign up with Google" button, it triggers the `signIn` function from the `useGoogleLogin` hook.
+2. The user is prompted to sign in with their Google account.
+3. Once the user is successfully authenticated, the `onUserLoaded` callback is triggered, and the user object containing the authentication tokens and profile information is passed as an argument.
+4. In the `onUserLoaded` callback, the user's information is extracted, including the `id_token` (socialMediaAccessToken), `name`, and `email`.
+5. The extracted information is sent as a POST request to your backend endpoint (`localhost:3000/user/signup`) to perform the sign-up process.
+6. In the backend, the `signup` controller receives the request and checks if the user already exists.
+7. If the user doesn't exist and the `socialMediaProvider` is "google", the `getUserProfileFromSocialMediaAPIGoogle` function is called to verify and retrieve the user's profile information using the `idToken` (socialMediaAccessToken).
+8. The verified profile information is used to create a new user in the database.
+9. The backend sends a response back to the frontend indicating whether the sign-up was successful or not.
+10. In the frontend, the response is handled accordingly, and any additional actions can be performed.
+
+Overall, this flow should allow users to sign up using their Google accounts successfully. Just make sure to provide the correct values for `process.env.GOOGLE_CLIENT_ID` on both the frontend and backend to ensure the integration with the Google API works properly.
+

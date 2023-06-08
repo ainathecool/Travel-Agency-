@@ -44,13 +44,13 @@ const getAllTransportations = async (req, res) => {
   const getTransportationsByName = async (req, res) => {
     try {
       const { name } = req.query;
-      const transportation = await Transportation.find({ name }).populate('fromLocation').populate('toLocation');//.populate('reviews');
+      const transportation = await Transportation.find({ name: { $regex: name, $options: 'i' } }).populate('fromLocation').populate('toLocation');//.populate('reviews');
   
-      if (transportation.length === 0) {
-        return res.status(404).json({ message: 'No transportation found' });
+      if (!transportation) {
+        return res.status(404).json({ message: 'transportation not found' });
       }
   
-      res.status(200).json({ transportation });
+      res.status(200).json({ transportation: transportation });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });

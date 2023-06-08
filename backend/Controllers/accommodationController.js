@@ -68,7 +68,7 @@ const getAccommodations = async (req, res) => {
     try {
       const accommodations = await Accommodation.find().populate('location reviews');
        // const accommodations = await Accommodation.find().populate('location');
-      res.status(200).json({ accommodations });
+      res.status(200).json({ accommodations: accommodations });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
@@ -81,13 +81,13 @@ const getAccommodations = async (req, res) => {
 const getAccommodationsByName = async (req, res) => {
     try {
       const { name } = req.query;
-      const accommodations = await Accommodation.find({ name }).populate('location').populate('reviews');
+      const accommodations = await Accommodation.find({ name: { $regex: name, $options: 'i' }  }).populate('location').populate('reviews');
   
-      if (accommodations.length === 0) {
-        return res.status(404).json({ message: 'No accommodations found' });
+      if (!accommodations) {
+        return res.status(404).json({ message: 'accommodations not found' });
       }
   
-      res.status(200).json({ accommodations });
+      res.status(200).json({ accommodations: accommodations });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });

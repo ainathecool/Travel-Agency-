@@ -1,21 +1,27 @@
 const { google } = require('googleapis'); //for google
 const axios = require('axios'); //for facebook
 
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 //will be using access tokens functionalities
 
 
 //accessing from google
-const getUserProfileFromSocialMediaAPIGoogle = async (accessToken, provider) => {
-  const oauth2Client = new google.auth.OAuth2();
-  oauth2Client.setCredentials({ access_token: accessToken });
-
-  const plus = google.plus({ version: 'v1', auth: oauth2Client });
-  const { data: { emails, displayName } } = await plus.people.get({ userId: 'me' });
-
-  return { name: displayName, email: emails[0].value };
-}
-
+const getUserProfileFromSocialMediaAPIGoogle = async (idToken) => {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const { name, email } = payload;
+    return { name, email };
+  } catch (error) {
+    console.error('Error verifying Google ID token:', error);
+    throw error;
+  }
+};
 
 //accessing from facebook
 const getUserProfileFromSocialMediaAPIFacebook = async (accessToken, provider) => {

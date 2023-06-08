@@ -1,0 +1,46 @@
+/* Footer.css */
+
+.header{
+
+    background-color: #006779;
+    padding: 20px;
+    text-align: center;
+    color: #b4ffec;
+}
+.footer {
+    background-color: #006779;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .footer-options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .footer-option {
+    list-style-type: none;
+  }
+  
+  .footer-option a {
+    text-decoration: none;
+    color: #b4ffec;
+    font-weight: bold;
+  }
+  
+  .footer-contact {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .user-footer__details email {
+    color: blue;
+  }
+  
+  .footer-phone {
+    color: green;
+  }
+  

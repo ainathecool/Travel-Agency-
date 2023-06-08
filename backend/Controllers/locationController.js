@@ -34,7 +34,7 @@ const populateLocations = async () => {
 const getAllLocations = async (req, res) => {
   try {
     const locations = await Location.find();
-    res.status(200).json({ locations });
+    res.status(200).json({ locations: locations  });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to get locations' });
@@ -46,19 +46,20 @@ const getAllLocations = async (req, res) => {
 //get locations by name
 const getLocationByName = async (req, res) => {
   try {
-    const { name } = req.params;
-    const location = await Location.findOne(name);
+    const { name } = req.query;
+    const location = await Location.find({ name: { $regex: name, $options: 'i' } });
     
     if (!location) {
       return res.status(404).json({ message: 'Location not found' });
     }
     
-    res.status(200).json({ location });
+    return res.status(200).json({ location: location });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Failed to get location' });
+    return res.status(500).json({ message: 'Failed to get location' });
   }
 }
+
 
 
 //create location yourself
