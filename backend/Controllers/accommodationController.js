@@ -54,7 +54,7 @@ const createAccommodation = async (req, res) => {
       });
   
       await accommodation.save();
-      res.status(201).json({ accommodation });
+      res.status(201).json({ message : "accommodation created"});
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
@@ -106,7 +106,7 @@ const getAccommodationsByName = async (req, res) => {
      // let updatedAccommodation = await Location.findOne({ name });
   
       const updatedAccommodation = await Accommodation.findOneAndUpdate(
-        { name },
+        { name: { $regex: name, $options: 'i' } },
         {
           description,
           imageUrl,
@@ -122,7 +122,7 @@ const getAccommodationsByName = async (req, res) => {
         return res.status(404).json({ message: 'Accommodation not found' });
       }
   
-      res.status(200).json({ accommodation: updatedAccommodation });
+      res.status(200).json({ message: "accommodation updated" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
@@ -138,7 +138,7 @@ const deleteAccommodationByName = async (req, res) => {
       const { name } = req.body;
   
       // Delete the location by name
-      const result = await Accommodation.deleteOne({ name });
+      const result = await Accommodation.deleteOne({ name: { $regex: name, $options: 'i' } });
   
       if (result.deletedCount === 0) {
         return res.status(404).json({ message: 'Accommodation not found' });

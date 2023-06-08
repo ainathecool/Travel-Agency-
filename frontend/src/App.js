@@ -22,6 +22,9 @@ import SearchAccommodation from './pages/Accommodation/SearchAccommodation';
 import ManageAccommodation from './pages/Accommodation/ManageAccommodation';
 import UserAccommodation from './pages/Accommodation/UserAccommodation';
 import ViewAccommodations from './pages/Accommodation/ViewAccommodation';
+import CreateAccommodations from './pages/Accommodation/CreateAccommodations';
+import UpdateAccommodations from './pages/Accommodation/UpdateAccommodations';
+import DeleteAccommodation from './pages/Accommodation/DeleteAccommodations';
 
 import SearchActivities from './pages/Activities/SearchActivities';
 import ManageActivities from './pages/Activities/ManageActivities';
@@ -74,6 +77,9 @@ function App() {
         <Route path="/manageAccommodations" element={<ManageAccommodation/>}/>
         <Route path="/Accommodation" element={<UserAccommodation/>}/>
         <Route path="/viewAccommodations" element={<ViewAccommodations/>}/>
+        <Route path="/addAccommodation" element={<CreateAccommodations/>}/>
+        <Route path="/updateAccommodation" element={<UpdateAccommodations/>}/>
+        <Route path="/deleteAccommodation" element={<DeleteAccommodation/>}/>
 
         <Route path="/searchActivities" element={<SearchActivities/>}/>
         <Route path="/manageActivities" element={<ManageActivities/>}/>
